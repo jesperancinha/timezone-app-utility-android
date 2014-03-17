@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Practical Time Zone</string>
+    <string name="dummy_button">Sortir</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="country_code">Country Code:</string>
+    <string name="extra_info">Extra Info:</string>
+    <string name="place_name">Place Name:</string>
+    <string name="time_zone">Fuseau horaire:</string>
+    <string name="time">Heure:</string>
+    <string name="time_zone_time_request">Demande de fuseau horaire et de l\'heuret</string>
+    <string name="not_found">Pas trouvé!</string>
+    <string name="timezone_warning">Votre fuseau horaire appara\ît ici</string>
+    <string name="separator">sperator</string>
+    <string name="return_text">Return</string>
+
+</resources>

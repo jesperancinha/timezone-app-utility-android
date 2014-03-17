@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pop_up"
+    android:layout_gravity="center_horizontal|center_vertical|center"
+    android:gravity="center_vertical|center_horizontal|center"
+    android:id="@+id/popup">
+
+
+        <TableRow android:layout_gravity="center|center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/need_to"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:layout_gravity="center_vertical"
+                style="@style/CustomText" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/many_countries"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                style="@style/CustomText" />
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/return_text"
+                android:id="@+id/btnGoBack"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/btn_bkgrnd_def" />
+        </TableRow>
+
+</TableLayout>

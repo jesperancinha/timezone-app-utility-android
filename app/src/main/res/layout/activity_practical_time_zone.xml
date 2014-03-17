@@ -1,0 +1,250 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.joai.timezone.PracticalTimeZoneActivity">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:gravity="center_horizontal">
+
+
+            <TableRow
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fitsSystemWindows="true"
+                    android:paddingTop="0px">
+
+
+                    <TableLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="0dp">
+
+                        <TableRow
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/fullscreen_content"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:keepScreenOn="true"
+                                android:textStyle="bold"
+                                android:height="50dp"
+                                android:layout_gravity="center_vertical"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="@string/click_for_controls"
+                                android:gravity="center_horizontal|center_vertical"
+                                android:layout_span="2"
+                                android:layout_weight="1" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="left|top">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="@string/place_name"
+                                android:id="@+id/textView"
+                                android:layout_height="60px" />
+
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editPlaceName"
+                                android:layout_weight="1"
+                                android:background="@drawable/timezone_style_edit"
+                                android:textColor="#000000"
+                                android:cursorVisible="true"
+                                android:inputType="text" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="@string/country_code"
+                                android:id="@+id/textView2"
+                                android:layout_height="60px" />
+
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editCountryCode"
+                                android:layout_weight="1"
+                                android:background="@drawable/timezone_style_edit"
+                                android:textColor="#000000" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="@string/extra_info"
+                                android:id="@+id/textView3"
+                                android:layout_height="60dp" />
+
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editExtraInfo"
+                                android:layout_weight="1"
+                                android:background="@drawable/timezone_style_edit"
+                                android:textColor="#000000" />
+                        </TableRow>
+
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:minHeight="40dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/imageView"
+                                android:layout_column="0"
+                                android:layout_span="2"
+                                android:src="@drawable/img_bar"
+
+                                android:contentDescription="@string/separator" />
+                        </TableRow>
+
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="center">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="60px"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="@string/time_zone"
+                                android:id="@+id/textViewTimeZone" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:id="@+id/labelTimeZone"
+                                android:layout_weight="1"
+                                android:background="@drawable/timezone_style"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:text="@string/timezone_warning" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="60px"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="@string/time"
+                                android:id="@+id/textTimeZone"
+                                android:layout_column="0"
+                                android:layout_span="2" />
+
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal|center_vertical">
+
+
+                            <TimePicker
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/timePicker"
+                                android:layout_column="0"
+                                android:layout_span="2"
+                                android:gravity="center_vertical|center_horizontal" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical|center_horizontal">
+
+                            <Button
+                                android:text="@string/time_zone_time_request"
+                                android:id="@+id/btnTimeZoneRequest"
+                                android:layout_column="0"
+                                android:layout_span="2"
+                                android:background="@drawable/btn_bkgrnd_def"
+                                android:textAlignment="center"
+                                android:layout_width="match_parent"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:layout_height="wrap_content" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:id="@+id/fullscreen_content_controls"
+                            android:background="@color/black_overlay"
+                            android:orientation="horizontal"
+                            tools:ignore="UselessParent">
+
+
+                            <Button
+                                android:id="@+id/dummy_button"
+                                style="?metaButtonBarButtonStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_span="2"
+                                android:background="@drawable/btn_bkgrnd_def"
+                                android:layout_gravity="bottom"
+                                android:text="@string/dummy_button" />
+
+
+                        </TableRow>
+
+
+                    </TableLayout>
+
+
+                </FrameLayout>
+            </TableRow>
+
+        </TableLayout>
+    </ScrollView>
+</FrameLayout>
