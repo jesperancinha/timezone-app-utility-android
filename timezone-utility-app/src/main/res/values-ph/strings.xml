@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Practical Time Zone</string>
+    <string name="dummy_button">Labasan</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="country_code">Country Code:</string>
+    <string name="extra_info">Dagdag na Impormasyon:</string>
+    <string name="place_name">Ilagay Pangalan:</string>
+    <string name="time_zone">Timezone:</string>
+    <string name="time">Oras:</string>
+    <string name="time_zone_time_request">Timezone at Oras kahilingan</string>
+    <string name="not_found">Hindi Natagpuan!</string>
+    <string name="timezone_warning">Ang iyong timezone ay lilitaw dito</string>
+    <string name="separator">sperator</string>
+    <string name="checking_times">Sinusuri ang Times (pindutin ang upang ikansela ...)</string>
+    <string name="click_for_controls">Mag-click dito para sa mga kontrol</string>
+    <string name="many_countries">(many countries have multiple timezones. we need a place for accuracy)</string>
+    <string name="return_text">Pagbabalik</string>
+    <string name="need_to">Kailangan mong magpasok ng isang lugar!</string>
+
+</resources>

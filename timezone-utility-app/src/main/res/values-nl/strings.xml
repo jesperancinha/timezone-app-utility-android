@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Practical Time Zone</string>
+    <string name="dummy_button">Uitgang</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="country_code">Landnummer:</string>
+    <string name="extra_info">Extra Info:</string>
+    <string name="place_name">Plaats Naam:</string>
+    <string name="time_zone">Tijdzone:</string>
+    <string name="time">Tijd:</string>
+    <string name="time_zone_time_request">Tijdzone en tijd verzoek</string>
+    <string name="not_found">Niet gevonden!</string>
+    <string name="timezone_warning">Uw tijdzone zal hier verschijnen</string>
+    <string name="separator">sperator</string>
+    <string name="return_text">Terug</string>
+    <string name="checking_times">Controleren Times (druk op om te annuleren ...)</string>
+    <string name="click_for_controls">Klik hier voor de controles</string>
+    <string name="many_countries">(veel landen hebben meerdere tijdzones. we een plek voor nauwkeurigheid nodig)</string>
+    <string name="need_to">Je nodig hebt om een plek in te voegen!</string>
+
+</resources>
