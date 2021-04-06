@@ -13,7 +13,7 @@ The android app itself it's not currently available due to ongoing code changes.
 ![alt text](timezone-utility-app/src/main/res/drawable-hdpi/ic_launcher.png "Logo hdpi")
 ![alt text](timezone-utility-app/src/main/res/drawable-mdpi/ic_launcher.png "Logo mdpi")
 
-## About me 👨🏽‍💻🚀
+## About me 👨🏽‍💻🚀🏳️‍🌈
 
 [![alt text](https://raw.githubusercontent.com/jesperancinha/project-signer/master/project-signer-templates/icons-20/JEOrgLogo-20.png "João Esperancinha Homepage")](http://joaofilipesabinoesperancinha.nl)
 [![Twitter Follow](https://img.shields.io/twitter/follow/joaofse?label=João%20Esperancinha&style=social "Twitter")](https://twitter.com/joaofse)
