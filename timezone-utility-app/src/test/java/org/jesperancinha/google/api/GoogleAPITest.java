@@ -3,8 +3,6 @@ package org.jesperancinha.google.api;
 import org.joda.time.DateTimeZone;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class GoogleAPITest {
 
     @Test
