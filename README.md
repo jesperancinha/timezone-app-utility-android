@@ -12,6 +12,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/d8230de102e343d988265efd87f4ce08)](https://www.codacy.com/gh/jesperancinha/timezone-app-utility-android/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jesperancinha/timezone-app-utility-android&amp;utm_campaign=Badge_Grade)
 
 [![Coverage Status](https://coveralls.io/repos/github/jesperancinha/timezone-app-utility-android/badge.svg?branch=master)](https://coveralls.io/github/jesperancinha/timezone-app-utility-android?branch=master)
+[![codecov](https://codecov.io/gh/jesperancinha/timezone-app-utility-android/branch/master/graph/badge.svg?token=EbA7C1LULT)](https://codecov.io/gh/jesperancinha/timezone-app-utility-android)
 
 [![GitHub language count](https://img.shields.io/github/languages/count/jesperancinha/timezone-app-utility-android.svg)](#)
 [![GitHub top language](https://img.shields.io/github/languages/top/jesperancinha/timezone-app-utility-android.svg)](#)
