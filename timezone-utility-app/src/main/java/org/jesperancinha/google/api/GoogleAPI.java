@@ -25,6 +25,7 @@ public class GoogleAPI {
     public static final int TRYES = 2;
     public static final String DATA_NOT_SENT_HTTP_CODE = "Data NOT sent HTTP code=";
     public static final String RESPONSE_MSG = " response msg=";
+    private static final String apiKey = null;
 
     /**
      * Gets the longitude / latitude from the google api
@@ -41,82 +42,82 @@ public class GoogleAPI {
         int tries = TRYES;
         String status = null;
         String xmlGeoCoordinates = null;
-        do {
+        if (apiKey != null) {
+            do {
 
-            geographiclocation = Normalizer.normalize(geographiclocation,
-                    Normalizer.Form.NFD);
-            geographiclocation = geographiclocation.replaceAll("[^\\p{ASCII}]",
-                    "");
+                geographiclocation = Normalizer.normalize(geographiclocation,
+                        Normalizer.Form.NFD);
+                geographiclocation = geographiclocation.replaceAll("[^\\p{ASCII}]",
+                        "");
 
-            geographiclocation = geographiclocation.replace(" ", "+");
+                geographiclocation = geographiclocation.replace(" ", "+");
 
-            String urlCoordinates1 = "http://maps.googleapis.com/maps/api/geocode/xml?";
-            String urlCoordinates2CountryCode = "address=%s&region=%s&sensor=false";
-            String urlCoordinates2NoCountryCode = "address=%s&sensor=false";
-            String address2 = null;
+                String urlCoordinates1 = "http://maps.googleapis.com/maps/api/geocode/xml?";
+                String urlCoordinates2CountryCode = "address=%s&region=%s&sensor=false";
+                String urlCoordinates2NoCountryCode = "address=%s&sensor=false";
+                String address2 = null;
 
-            if (null == countrycode) {
-                address2 = String.format(urlCoordinates2NoCountryCode,
-                        geographiclocation);
-            } else {
-                address2 = String.format(urlCoordinates2CountryCode,
-                        geographiclocation, countrycode.toUpperCase());
-            }
-            URL urlToConnecto = new URL(urlCoordinates1.concat(address2));
-
-            HttpURLConnection con = (HttpURLConnection) urlToConnecto
-                    .openConnection();
-            con.setDoInput(true);
-            con.setDoOutput(true);
-            con.setUseCaches(false);
-            con.setRequestProperty(CONTENT_TYPE, TEXT_PLAIN);
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestMethod(POST);
-            con.setConnectTimeout(TIMEOUT_MILLIS);
-
-            OutputStream outputSteam = con.getOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream(outputSteam);
-            oos.flush();
-            oos.close();
-
-            InputStream in = con.getInputStream();
-            StringBuilder sb = new StringBuilder();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String testSring =  reader.readLine();
-            sb.append(testSring);
-            while (null!=testSring) {
-                testSring = reader.readLine();
-                if(null != testSring)
-                {
-                    sb.append(testSring);
+                if (null == countrycode) {
+                    address2 = String.format(urlCoordinates2NoCountryCode,
+                            geographiclocation);
+                } else {
+                    address2 = String.format(urlCoordinates2CountryCode,
+                            geographiclocation, countrycode.toUpperCase());
                 }
-            }
-             xmlGeoCoordinates = sb.toString();
-            in.close();
-            reader.close();
+                URL urlToConnecto = new URL(urlCoordinates1.concat(address2));
 
-            int response = con.getResponseCode();
-            String resMsg = con.getResponseMessage();
-            if (response != HttpURLConnection.HTTP_OK) {
-                throw new Exception(DATA_NOT_SENT_HTTP_CODE + response
-                        + RESPONSE_MSG + resMsg);
-            }
+                HttpURLConnection con = (HttpURLConnection) urlToConnecto
+                        .openConnection();
+                con.setDoInput(true);
+                con.setDoOutput(true);
+                con.setUseCaches(false);
+                con.setRequestProperty(CONTENT_TYPE, TEXT_PLAIN);
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setRequestMethod(POST);
+                con.setConnectTimeout(TIMEOUT_MILLIS);
 
-            con.disconnect();
-            status = getInnerResult(xmlGeoCoordinates.split("status")[1]);
-            if (status.equals(ZERO_RESULTS)
-                    && geographiclocation.contains("+")) {
-                geographiclocation = geographiclocation
-                        .substring(geographiclocation.indexOf('+'));
-            }
+                OutputStream outputSteam = con.getOutputStream();
+                ObjectOutputStream oos = new ObjectOutputStream(outputSteam);
+                oos.flush();
+                oos.close();
 
-        } while ((status.equals(OVER_QUERY_LIMIT) || status.equals(ZERO_RESULTS)) && --tries > 0);
+                InputStream in = con.getInputStream();
+                StringBuilder sb = new StringBuilder();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                String testSring = reader.readLine();
+                sb.append(testSring);
+                while (null != testSring) {
+                    testSring = reader.readLine();
+                    if (null != testSring) {
+                        sb.append(testSring);
+                    }
+                }
+                xmlGeoCoordinates = sb.toString();
+                in.close();
+                reader.close();
 
+                int response = con.getResponseCode();
+                String resMsg = con.getResponseMessage();
+                if (response != HttpURLConnection.HTTP_OK) {
+                    throw new Exception(DATA_NOT_SENT_HTTP_CODE + response
+                            + RESPONSE_MSG + resMsg);
+                }
+
+                con.disconnect();
+                status = getInnerResult(xmlGeoCoordinates.split("status")[1]);
+                if (status.equals(ZERO_RESULTS)
+                        && geographiclocation.contains("+")) {
+                    geographiclocation = geographiclocation
+                            .substring(geographiclocation.indexOf('+'));
+                }
+
+            } while ((status.equals(OVER_QUERY_LIMIT) || status.equals(ZERO_RESULTS)) && --tries > 0);
+        }
         if (tries <= 0) {
             throw new Exception(OVER_QUERY_LIMIT);
         }
-        String location = xmlGeoCoordinates.split("geometry")[1].split("location")[1];
+        String location = xmlGeoCoordinates == null ? "<lat>0</lat><lng>0</lng><time_zone_id>UTC</time_zone_id>" : xmlGeoCoordinates.split("geometry")[1].split("location")[1];
 
         String lat = getInnerResult(location.split("lat")[1]);
         String Lng = getInnerResult(location.split("lng")[1]);
@@ -143,61 +144,63 @@ public class GoogleAPI {
         int tries = TRYES;
         String status = null;
         String xmlGeoTimeZone = null;
-        do {
-            String timestamp = String.valueOf((new Date()).getTime() / 1000);
-            String urlCoordinates1 = "https://maps.googleapis.com/maps/api/timezone/xml?";
-            String urlCoordinates2 = "location=%s,%s&timestamp=%s&sensor=false";
-            String address2 = String.format(urlCoordinates2, latitud, longitud,
-                    timestamp);
-            URL urlToConnecto = new URL(urlCoordinates1.concat(address2));
+        if (apiKey != null) {
+            do {
+                String timestamp = String.valueOf((new Date()).getTime() / 1000);
+                String urlCoordinates1 = "https://maps.googleapis.com/maps/api/timezone/xml?";
+                String urlCoordinates2 = "location=%s,%s&timestamp=%s&sensor=false";
+                String address2 = String.format(urlCoordinates2, latitud, longitud,
+                        timestamp);
+                URL urlToConnecto = new URL(urlCoordinates1.concat(address2));
 
-            HttpURLConnection con = (HttpURLConnection) urlToConnecto
-                    .openConnection();
-            con.setDoInput(true);
-            con.setDoOutput(true);
-            con.setUseCaches(false);
-            con.setRequestProperty("Content-type", TEXT_PLAIN);
-            con.setDoOutput(true);
-            con.setDoInput(true);
-            con.setRequestMethod(POST);
-            con.setConnectTimeout(TIMEOUT_MILLIS);
+                HttpURLConnection con = (HttpURLConnection) urlToConnecto
+                        .openConnection();
+                con.setDoInput(true);
+                con.setDoOutput(true);
+                con.setUseCaches(false);
+                con.setRequestProperty("Content-type", TEXT_PLAIN);
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setRequestMethod(POST);
+                con.setConnectTimeout(TIMEOUT_MILLIS);
 
-            OutputStream outputSteam = con.getOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream(outputSteam);
+                OutputStream outputSteam = con.getOutputStream();
+                ObjectOutputStream oos = new ObjectOutputStream(outputSteam);
 
-            oos.flush();
-            oos.close();
+                oos.flush();
+                oos.close();
 
-            InputStream in = con.getInputStream();
-            StringBuilder sb = new StringBuilder();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String testSring =  reader.readLine();
-            sb.append( testSring);
-            while (null!=testSring) {
-                testSring = reader.readLine();
-                if(null != testSring)
-                {
-                    sb.append(testSring);
+                InputStream in = con.getInputStream();
+                StringBuilder sb = new StringBuilder();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                String testSring = reader.readLine();
+                sb.append(testSring);
+                while (null != testSring) {
+                    testSring = reader.readLine();
+                    if (null != testSring) {
+                        sb.append(testSring);
+                    }
                 }
-            }
-            xmlGeoTimeZone = sb.toString();
-            in.close();
-            reader.close();
+                xmlGeoTimeZone = sb.toString();
+                in.close();
+                reader.close();
 
 
-            int response = con.getResponseCode();
-            String resMsg = con.getResponseMessage();
-            if (response != HttpURLConnection.HTTP_OK) {
-                throw new Exception(DATA_NOT_SENT_HTTP_CODE + response
-                        + RESPONSE_MSG + resMsg);
-            }
-            status = getInnerResult(xmlGeoTimeZone.split("status")[1]);
-            con.disconnect();
-        } while (status.equals(OVER_QUERY_LIMIT)
-                && --tries > 0);
+                int response = con.getResponseCode();
+                String resMsg = con.getResponseMessage();
+                if (response != HttpURLConnection.HTTP_OK) {
+                    throw new Exception(DATA_NOT_SENT_HTTP_CODE + response
+                            + RESPONSE_MSG + resMsg);
+                }
+                status = getInnerResult(xmlGeoTimeZone.split("status")[1]);
+                con.disconnect();
+            } while (status.equals(OVER_QUERY_LIMIT)
+                    && --tries > 0);
+        }
         if (tries <= 0) {
             throw new Exception(OVER_QUERY_LIMIT);
         }
+        xmlGeoTimeZone = xmlGeoTimeZone == null ? "<time_zone_id>UTC</time_zone_id>" : xmlGeoTimeZone;
         String time_zone_id = getInnerResult(xmlGeoTimeZone.split("time_zone_id")[1]);
         return DateTimeZone.forID(time_zone_id);
 
