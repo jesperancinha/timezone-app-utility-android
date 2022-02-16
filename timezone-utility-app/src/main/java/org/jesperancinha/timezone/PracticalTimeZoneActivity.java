@@ -22,7 +22,6 @@ import android.widget.TimePicker;
 
 import org.jesperancinha.google.api.GoogleAPI;
 import org.jesperancinha.timezone.util.SystemUiHider;
-import com.newrelic.agent.android.NewRelic;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -177,52 +176,42 @@ public class PracticalTimeZoneActivity extends Activity {
                             location.append(" ").append(country);
                         }
 
-                        t = new Thread(new Runnable() {
-
-                            @Override
-                            public void run() {
-
-                                try {
-
-                                    final DateTimeZone dateTimeZone = GoogleAPI.getTimeZone(location.toString(), country);
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (!isFinishing()) {
-                                                if (null != dateTimeZone) {
-                                                    timeZone.setText(dateTimeZone.getID());
-                                                    DateTime now = DateTime.now(dateTimeZone);
-                                                    digitalClock.setCurrentHour(now.getHourOfDay());
-                                                    digitalClock.setCurrentMinute(now.getMinuteOfHour());
-                                                } else {
-                                                    timeZone.setText(getString(R.string.not_found));
-                                                }
-                                            }
+                        t = new Thread(() -> {
+                            try {
+                                final DateTimeZone dateTimeZone = GoogleAPI.getTimeZone(location.toString(), country);
+                                runOnUiThread(() -> {
+                                    if (!isFinishing()) {
+                                        if (null != dateTimeZone) {
+                                            timeZone.setText(dateTimeZone.getID());
+                                            DateTime now = DateTime.now(dateTimeZone);
+                                            digitalClock.setCurrentHour(now.getHourOfDay());
+                                            digitalClock.setCurrentMinute(now.getMinuteOfHour());
+                                        } else {
+                                            timeZone.setText(getString(R.string.not_found));
                                         }
-                                    });
+                                    }
+                                });
 
-                                } catch (Exception e) {
+                            } catch (Exception e) {
 
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (!isFinishing()) {
-                                                timeZone.setText(getString(R.string.not_found));
-                                            }
-                                        }
-                                    });
-
-                                }
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         if (!isFinishing()) {
-                                            btnTimeZoneRequest.setText(getString(R.string.time_zone_time_request));
+                                            timeZone.setText(getString(R.string.not_found));
                                         }
                                     }
                                 });
 
                             }
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (!isFinishing()) {
+                                        btnTimeZoneRequest.setText(getString(R.string.time_zone_time_request));
+                                    }
+                                }
+                            });
 
                         });
 
@@ -233,9 +222,6 @@ public class PracticalTimeZoneActivity extends Activity {
 
             }
         });
-
-
-        NewRelic.withApplicationToken("AA84e02234381c26f55e1f0e9c5b435bbbdeb05b82").start(this.getApplication());
     }
 
     @Override
