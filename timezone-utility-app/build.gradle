@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
 
+
 buildscript {
     repositories {
         mavenLocal()
