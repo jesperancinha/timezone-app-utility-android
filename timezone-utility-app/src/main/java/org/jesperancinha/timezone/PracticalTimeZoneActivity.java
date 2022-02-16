@@ -156,71 +156,62 @@ public class PracticalTimeZoneActivity extends Activity {
 
         btnTimeZoneRequest = (Button) findViewById(R.id.btnTimeZoneRequest);
 
-        btnTimeZoneRequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final StringBuilder location = new StringBuilder(placeName.getText().toString());
-                final String country = countryCode.getText().toString();
-                String extra = extraInfo.getText().toString();
+        btnTimeZoneRequest.setOnClickListener(view -> {
+            final StringBuilder location = new StringBuilder(placeName.getText().toString());
+            final String country = countryCode.getText().toString();
+            String extra = extraInfo.getText().toString();
 
-                if (location.toString().isEmpty()) {
-                    showPopup(PracticalTimeZoneActivity.this);
+            if (location.toString().isEmpty()) {
+                showPopup(PracticalTimeZoneActivity.this);
+            } else {
+                if (null != t && t.isAlive()) {
+                    t.interrupt();
+                    t = null;
+                    btnTimeZoneRequest.setText(getString(R.string.time_zone_time_request));
                 } else {
-                    if (null != t && t.isAlive()) {
-                        t.interrupt();
-                        t = null;
-                        btnTimeZoneRequest.setText(getString(R.string.time_zone_time_request));
-                    } else {
-                        btnTimeZoneRequest.setText(getString(R.string.checking_times));
-                        if (null != country) {
-                            location.append(" ").append(country);
-                        }
+                    btnTimeZoneRequest.setText(getString(R.string.checking_times));
+                    if (null != country) {
+                        location.append(" ").append(country);
+                    }
 
-                        t = new Thread(() -> {
-                            try {
-                                final DateTimeZone dateTimeZone = GoogleAPI.getTimeZone(location.toString(), country);
-                                runOnUiThread(() -> {
-                                    if (!isFinishing()) {
-                                        if (null != dateTimeZone) {
-                                            timeZone.setText(dateTimeZone.getID());
-                                            DateTime now = DateTime.now(dateTimeZone);
-                                            digitalClock.setCurrentHour(now.getHourOfDay());
-                                            digitalClock.setCurrentMinute(now.getMinuteOfHour());
-                                        } else {
-                                            timeZone.setText(getString(R.string.not_found));
-                                        }
-                                    }
-                                });
-
-                            } catch (Exception e) {
-
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (!isFinishing()) {
-                                            timeZone.setText(getString(R.string.not_found));
-                                        }
-                                    }
-                                });
-
-                            }
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (!isFinishing()) {
-                                        btnTimeZoneRequest.setText(getString(R.string.time_zone_time_request));
+                    t = new Thread(() -> {
+                        try {
+                            final DateTimeZone dateTimeZone = GoogleAPI.getTimeZone(location.toString(), country);
+                            runOnUiThread(() -> {
+                                if (!isFinishing()) {
+                                    if (null != dateTimeZone) {
+                                        timeZone.setText(dateTimeZone.getID());
+                                        DateTime now = DateTime.now(dateTimeZone);
+                                        digitalClock.setCurrentHour(now.getHourOfDay());
+                                        digitalClock.setCurrentMinute(now.getMinuteOfHour());
+                                    } else {
+                                        timeZone.setText(getString(R.string.not_found));
                                     }
                                 }
                             });
 
+                        } catch (Exception e) {
+
+                            runOnUiThread(() -> {
+                                if (!isFinishing()) {
+                                    timeZone.setText(getString(R.string.not_found));
+                                }
+                            });
+
+                        }
+                        runOnUiThread(() -> {
+                            if (!isFinishing()) {
+                                btnTimeZoneRequest.setText(getString(R.string.time_zone_time_request));
+                            }
                         });
 
+                    });
 
-                        t.start();
-                    }
+
+                    t.start();
                 }
-
             }
+
         });
     }
 
@@ -298,13 +289,7 @@ public class PracticalTimeZoneActivity extends Activity {
         long timeEnd = new Date().getTime();
 
         Button btnGoBack = (Button) mainView.findViewById(R.id.btnGoBack);
-        btnGoBack.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                popup.dismiss();
-            }
-        });
+        btnGoBack.setOnClickListener(v -> popup.dismiss());
     }
 
 }
