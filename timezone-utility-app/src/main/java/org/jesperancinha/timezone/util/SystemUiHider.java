@@ -1,4 +1,4 @@
-package com.joai.timezone.util;
+package org.jesperancinha.timezone.util;
 
 import android.app.Activity;
 import android.os.Build;

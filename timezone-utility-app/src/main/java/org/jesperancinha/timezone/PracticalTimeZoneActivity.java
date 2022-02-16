@@ -1,4 +1,4 @@
-package com.joai.timezone;
+package org.jesperancinha.timezone;
 
 
 import android.annotation.TargetApi;
@@ -20,8 +20,8 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.joai.google.api.GoogleAPI;
-import com.joai.timezone.util.SystemUiHider;
+import org.jesperancinha.google.api.GoogleAPI;
+import org.jesperancinha.timezone.util.SystemUiHider;
 import com.newrelic.agent.android.NewRelic;
 
 import org.joda.time.DateTime;

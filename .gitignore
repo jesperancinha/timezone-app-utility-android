@@ -2,3 +2,7 @@
 target
 .idea
 *.iml
+.gradle
+bin
+build
+local.properties
