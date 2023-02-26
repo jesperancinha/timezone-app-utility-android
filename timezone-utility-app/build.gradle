@@ -41,9 +41,6 @@ android {
 }
 
 tasks.withType(Test) {
-    reports {
-        html.enabled false
-    }
     useJUnitPlatform()
     finalizedBy(jacocoTestReport)
 }
