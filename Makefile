@@ -1,3 +1,6 @@
+SHELL := /bin/bash
+GRADLE_VERSION := 8.0.2
+
 b: buildw
 buildw:
 	./gradlew clean build test jacocoTestReport -i
@@ -10,7 +13,14 @@ unpack-reports:
 	java -jar lib/jacococli.jar report timezone-utility-app/build/jacoco/testReleaseUnitTest.exec --classfiles timezone-utility-app/build/.transforms/*/transformed/out/jars/classes.jar --xml jacoco/jacocoRelease.xml
 	java -jar lib/jacococli.jar report timezone-utility-app/build/jacoco/testDebugUnitTest.exec --classfiles timezone-utility-app/build/.transforms/*/transformed/out/jars/classes.jar --xml jacoco/jacocoDebug.xml
 upgrade:
-	gradle wrapper --gradle-version 8.0.1
+	gradle wrapper --gradle-version $(GRADLE_VERSION)
 coverage:
 	./gradlew clean build test jacocoTestReport
 	./gradlew -i
+upgrade-gradle:
+	sudo apt upgrade
+	sudo apt update
+	export SDKMAN_DIR="$(HOME)/.sdkman"
+	[[ -s "$(HOME)/.sdkman/bin/sdkman-init.sh" ]] && source "$(HOME)/.sdkman/bin/sdkman-init.sh" &&	sdk update
+	[[ -s "$(HOME)/.sdkman/bin/sdkman-init.sh" ]] && source "$(HOME)/.sdkman/bin/sdkman-init.sh" &&	sdk install gradle $(GRADLE_VERSION)
+	[[ -s "$(HOME)/.sdkman/bin/sdkman-init.sh" ]] && source "$(HOME)/.sdkman/bin/sdkman-init.sh" &&	sdk use gradle $(GRADLE_VERSION)
