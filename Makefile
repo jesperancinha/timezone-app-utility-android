@@ -17,6 +17,11 @@ upgrade:
 coverage:
 	./gradlew clean build test jacocoTestReport
 	./gradlew -i
+dependencies:
+	./gradlew androidDependencies
+lint:
+	./gradlew lint test
+local-pipeline: dependencies lint b
 upgrade-gradle:
 	sudo apt upgrade
 	sudo apt update
