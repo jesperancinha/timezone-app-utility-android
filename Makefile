@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-GRADLE_VERSION ?= 8.5
+GRADLE_VERSION ?= 8.7
 
 b: buildw
 buildw:
@@ -13,7 +13,7 @@ unpack-reports:
 	java -jar lib/jacococli.jar report timezone-utility-app/build/jacoco/testReleaseUnitTest.exec --classfiles timezone-utility-app/build/.transforms/*/transformed/out/jars/classes.jar --xml jacoco/jacocoRelease.xml
 	java -jar lib/jacococli.jar report timezone-utility-app/build/jacoco/testDebugUnitTest.exec --classfiles timezone-utility-app/build/.transforms/*/transformed/out/jars/classes.jar --xml jacoco/jacocoDebug.xml
 upgrade:
-	gradle wrapper --gradle-version $(GRADLE_VERSION)
+	gradle wrapper --gradle-version $(GRADLE_VERSION) --validate-url
 coverage:
 	./gradlew clean build test jacocoTestReport
 	./gradlew -i
