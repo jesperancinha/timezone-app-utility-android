@@ -4,3 +4,14 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    groups:
+      kotlin:
+        patterns:
+          - "org.jetbrains.kotlin.*"
+          - "com.google.devtools.ksp"
+          - "kotlin*"
+          - "*kotlin*"
+      androix:
+        patterns:
+          - "*androix*"
+          - "androix*"
