@@ -58,17 +58,30 @@ dependencies {
     implementation 'org.javatuples:javatuples:1.2'
     implementation 'joda-time:joda-time:2.12.7'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'org.jesperancinha.itf:itf-chartizate-api:5.0.1'
     implementation 'com.android.support:multidex:1.0.3'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.0'
     testImplementation 'org.mockito:mockito-core:5.13.0'
     androidTestImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.0'
     androidTestImplementation 'org.assertj:assertj-core:3.26.3'
-    androidTestImplementation 'androidx.test:runner:1.6.1'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'org.mockito:mockito-android:5.13.0'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
-    androidTestImplementation 'androidx.test:runner:1.6.1'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
     androidTestUtil 'androidx.test:orchestrator:1.5.0'
+}
+
+configurations.all {
+    resolutionStrategy {
+        eachDependency { DependencyResolveDetails details ->
+            if (details.requested.group == 'org.jetbrains.kotlin' && details.requested.name.startsWith('kotlin-stdlib')) {
+                details.useVersion 'latest.release'
+            }
+            if (details.requested.group == 'org.jetbrains.kotlinx' && details.requested.name.startsWith('kotlinx-coroutines')) {
+                details.useVersion 'latest.release'
+            }
+        }
+    }
 }
