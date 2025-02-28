@@ -20,7 +20,7 @@ coverage:
 dependencies:
 	./gradlew androidDependencies
 lint:
-	./gradlew lint test
+	./gradlew lint test --scan
 local-pipeline: dependencies lint b
 upgrade-gradle:
 	sudo apt upgrade
