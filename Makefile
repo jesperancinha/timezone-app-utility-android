@@ -20,7 +20,7 @@ coverage:
 dependencies:
 	./gradlew androidDependencies
 lint:
-	./gradlew lint test
+	./gradlew lint test --scan
 local-pipeline: dependencies lint b
 upgrade-gradle:
 	sudo apt upgrade
@@ -54,3 +54,5 @@ deps-java-update:
 deps-quick-update: deps-compose-update deps-plugins-update deps-gradle-update
 accept-prs:
 	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/acceptPR.sh | bash
+update-repo-prs:
+	curl -sL https://raw.githubusercontent.com/jesperancinha/project-signer/master/update-all-repo-prs.sh | bash
