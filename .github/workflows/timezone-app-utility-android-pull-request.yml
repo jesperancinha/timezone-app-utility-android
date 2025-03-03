@@ -32,8 +32,8 @@ jobs:
 
     - name: Lint Fail
       if: failure()
-      run: cat ~/work/timezone-app-utility-android/timezone-app-utility-android/timezone-utility-app/build/reports/tests/testDebugUnitTest/index.html
-
+      run: cat ~/work/timezone-app-utility-android/timezone-app-utility-android/timezone-utility-app/build/reports/tests/testDebugUnitTest/index.html &&
+            ls -1 ~/work/timezone-app-utility-android/timezone-app-utility-android/timezone-utility-app/build/reports/tests/testDebugUnitTest/*.html | xargs -I {} cat {}
 
     - name: Build with Gradle
       run: ./gradlew build
